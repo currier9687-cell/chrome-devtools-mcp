@@ -1,7 +1,25 @@
 # Chrome DevTools MCP
 
 [![npm chrome-devtools-mcp package](https://img.shields.io/npm/v/chrome-devtools-mcp.svg)](https://npmjs.org/package/chrome-devtools-mcp)
+# yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
 
+name: Post an inline text message
+on:
+  push:
+    branches:
+      - main
+jobs:
+  run:
+    name: Leave a kind message after updates
+    runs-on: ubuntu-latest
+    steps:
+      - name: Greet the reader
+        uses: slackapi/slack-github-action@v2.1.1
+        with:
+          webhook: ${{ secrets.SLACK_WEBHOOK_URL }}
+          webhook-type: incoming-webhook
+          payload: |
+            text: "Greetings!"
 `chrome-devtools-mcp` lets your coding agent (such as Gemini, Claude, Cursor or Copilot)
 control and inspect a live Chrome browser. It acts as a Model-Context-Protocol
 (MCP) server, giving your AI coding assistant access to the full power of
